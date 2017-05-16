@@ -14,6 +14,8 @@ def get_data(url):
 
 def calculate(url):
     data = get_data(url)
+    # the counters are used to, well, keep count of communities
+    # and enable easy/efficient ranking
     points_not_working = Counter()
     points_working = Counter()
     points_unknown = Counter()

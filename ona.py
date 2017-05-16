@@ -1,12 +1,19 @@
 import requests
 from collections import Counter
 
-url = "https://raw.githubusercontent.com/onaio/ona-tech/master/data/water_points.json"
+
+def get_request(url):
+    request = requests.get(url)
+    return request
+
+
+def get_data(url):
+    request = get_request(url)
+    return request.json()
 
 
 def calculate(url):
-    request = requests.get(url)
-    data = request.json()
+    data = get_data(url)
     points_not_working = Counter()
     points_working = Counter()
     points_unknown = Counter()

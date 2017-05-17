@@ -3,7 +3,7 @@ import unittest
 from ona import get_request, get_data, calculate
 
 
-class TestStringMethods(unittest.TestCase):
+class TestOnaMethods(unittest.TestCase):
     url = "https://raw.githubusercontent.com/onaio/ona-tech/master/data/water_points.json"
 
     def test_request(self):

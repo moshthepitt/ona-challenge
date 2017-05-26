@@ -41,5 +41,29 @@ def calculate(url):
         'number_water_points': points_all.most_common(),
         'community_ranking': points_not_working_percentage
     }
+    return result
 
+
+def percent_water_functioning_by(url, bool_key, split_key):
+    result = {}
+    data = get_data(url)
+    holder = {}
+    for i in data:
+        bool_key_value = i[bool_key]
+        split_key_value = i[split_key]
+        if split_key_value not in holder:
+            holder[split_key_value] = {"sum": 0}
+        if bool_key_value not in holder[split_key_value]:
+            holder[split_key_value][bool_key_value] = 0
+        holder[split_key_value][bool_key_value] += 1
+        holder[split_key_value]["sum"] += 1
+    # so now we have a holder dict
+    # e.g. {'some_val': {'yes': 12, 'no': 8, 'sum': 20} ... }
+    for key, val in holder.items():
+        inner_results = {}
+        for key1, val1 in val.items():
+            if key1 != "sum":
+                perc = (val1 / val["sum"]) * 100
+                inner_results[key1] = perc
+        result[key] = inner_results
     return result
